@@ -4,43 +4,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Welcome to Vue</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-    crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-    crossorigin="anonymous">
+  <title>Basic Login</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <div class="container">
-    <div id="app">
-      <img src="https://vuejs.org/images/logo.png" alt="Vue logo">
-      <h1>{{ greeting }}</h1>
-      <ul>
-        <li>
-          To learn more about Vue, visit
-          <a :href="docsURL" target="_blank">
-          {{ humanizeURL(docsURL) }}
-        </a>
-        </li>
-        <li>
-          For live help with simple questions, check out
-          <a :href="gitterURL" target="_blank">
-          the Gitter chat
-        </a>
-        </li>
-        <li>
-          For more complex questions, post to
-          <a :href="forumURL" target="_blank">
-          the forum
-        </a>
-        </li>
-      </ul>
-    </div>
+    <div id="app"></div>
   </div>
 
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://cdn.auth0.com/js/lock/10.11/lock.min.js"></script>
+  <script src="node_modules/vue/dist/vue.min.js"></script>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/tether/dist/js/tether.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="index.js"></script>
 </body>
 
