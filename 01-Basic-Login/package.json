@@ -1,0 +1,19 @@
+{
+  "name": "01-basic-login",
+  "version": "1.0.0",
+  "description": "Basic Login",
+  "main": "index.js",
+  "repository": {},
+  "license": "MIT",
+  "scripts": {
+    "start": "browser-sync start --server . --files=\"*.css,*.js,*.html\""
+  },
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "font-awesome": "^4.7.0",
+    "vue": "^2.2.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.8"
+  }
+}
