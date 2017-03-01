@@ -38,6 +38,14 @@
     <router-view></router-view>
   </main>
 
+  <script type="text/x-template" id="home-template">
+    <h4>
+      You are logged in!
+    </h4>
+    <h4>
+      You are not logged in! Please <a @click="">Log In</a> to continue.
+    </h4>
+  </script>
   <script src="https://cdn.auth0.com/js/lock/10.11/lock.min.js"></script>
   <script src="node_modules/vue/dist/vue.min.js"></script>
   <script src="node_modules/vue-router/dist/vue-router.min.js"></script>

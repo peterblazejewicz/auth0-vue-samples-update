@@ -1,5 +1,5 @@
 const NotFound = { template: '<p>Page not found</p>' }
-const Home = { template: '<p>home page</p>' }
+const Home = { template: '#home-template' }
 const About = { template: '<p>about page</p>' }
 
 
@@ -8,7 +8,6 @@ const routes = {
   '/about': About
 }
 var app = new Vue({
-  el: '#app',
   routes: routes,
   data: {
     currentRoute: window.location.pathname
@@ -19,4 +18,5 @@ var app = new Vue({
     }
   },
   render (h) { return h(this.ViewComponent) }
-})
+});
+app.$mount('#app');
