@@ -1,11 +1,11 @@
 const NotFound = { template: '<p>Page not found</p>' }
-const Home = { template: '#home-template' }
-const About = { template: '<p>about page</p>' }
+const Home = { template: '#home-component' }
+const Callback = { template: '#callback-component' }
 
 
 const routes = {
   '/': Home,
-  '/about': About
+  '/callback': Callback
 }
 var app = new Vue({
   routes: routes,
