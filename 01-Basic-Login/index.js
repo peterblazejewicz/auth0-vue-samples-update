@@ -1,16 +1,22 @@
-new Vue({
+const NotFound = { template: '<p>Page not found</p>' }
+const Home = { template: '<p>home page</p>' }
+const About = { template: '<p>about page</p>' }
+
+
+const routes = {
+  '/': Home,
+  '/about': About
+}
+var app = new Vue({
   el: '#app',
+  routes: routes,
   data: {
-    greeting: 'Welcome to your Vue.js app!',
-    docsURL: 'http://vuejs.org/guide/',
-    gitterURL: 'https://gitter.im/vuejs/vue',
-    forumURL: 'http://forum.vuejs.org/'
+    currentRoute: window.location.pathname
   },
-  methods: {
-    humanizeURL: function (url) {
-      return url
-        .replace(/^https?:\/\//, '')
-        .replace(/\/$/, '')
+  computed: {
+    ViewComponent () {
+      return routes[this.currentRoute] || NotFound
     }
-  }
-});
+  },
+  render (h) { return h(this.ViewComponent) }
+})

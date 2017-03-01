@@ -10,13 +10,35 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body id="app">
+  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Auth0 - Vue.js</a>
+
+    <div class="navbar-collapse collapse" id="navbarsExampleDefault" aria-expanded="false">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <router-link to="/" class="nav-link">Home</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/login">Log In</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/logout" class="nav-link">Log Out</router-link>
+        </li>
+      </ul>
+    </div>
+  </nav>
   <div class="container">
-    <div id="app"></div>
+    <router-view></router-view>
   </div>
 
   <script src="https://cdn.auth0.com/js/lock/10.11/lock.min.js"></script>
   <script src="node_modules/vue/dist/vue.min.js"></script>
+  <script src="node_modules/vue-router/dist/vue-router.min.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="node_modules/tether/dist/js/tether.js"></script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
