@@ -1,22 +1,27 @@
-const NotFound = { template: '<p>Page not found</p>' }
-const Home = { template: '#home-component' }
-const Callback = { template: '#callback-component' }
-
-
-const routes = {
-  '/': Home,
-  '/callback': Callback
+var Home = {
+  template: '#home-template'
 }
-var app = new Vue({
-  routes: routes,
-  data: {
-    currentRoute: window.location.pathname
-  },
-  computed: {
-    ViewComponent () {
-      return routes[this.currentRoute] || NotFound
+var Login = {
+  template: '#login-template'
+}
+var Logout = {
+  template: '#logout-template'
+}
+
+var router = new VueRouter({
+  mode: 'history',
+  routes: [
+    {
+      path: '/',
+      component: Home
+    }, {
+      path: '/login',
+      component: Login
+    }, {
+      path: '/logout',
+      component: Logout
     }
-  },
-  render (h) { return h(this.ViewComponent) }
-});
-app.$mount('#app');
+  ]
+})
+
+var app = new Vue({router: router}).$mount('#app')

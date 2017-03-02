@@ -10,46 +10,53 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body id="app">
-  <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary fixed-top">
-    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<body>
+  <div id="app">
+    <header>
+      <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary fixed-top">
+        <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Auth0 - Vue.js</a>
+        <router-link to="/" class="navbar-brand">Auth0 - Vue.js</router-link>
+        <div class="navbar-collapse collapse" id="navbarsExampleDefault" aria-expanded="false">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <router-link to="/" class="nav-link">Home</router-link>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/login">Log In</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/logout" class="nav-link">Log Out</router-link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main class="container">
+      <router-view></router-view>
+    </main>
+  </div>
 
-    <div class="navbar-collapse collapse" id="navbarsExampleDefault" aria-expanded="false">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">Home</router-link>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/login">Log In</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/logout" class="nav-link">Log Out</router-link>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <main class="container">
-    <router-view></router-view>
-  </main>
-  <script type="text/x-template" id="home-component">
+  <script type="text/x-template" id="home-template">
     <h4>
       You are logged in!
     </h4>
+  </script>
+  <script type="text/x-template" id="login-template">
     <h4>
-      You are not logged in! Please <a @click="">Log In</a> to continue.
+      Login template
     </h4>
   </script>
-  <script type="text/x-template" id="callback-component">
-    <div class="loading">
-      <img src="assets/loading.svg" alt="loading">
-    </div>
+  <script type="text/x-template" id="logout-template">
+    <h4>
+      Logout templates
+    </h4>
   </script>
+
   <script src="https://cdn.auth0.com/js/lock/10.11/lock.min.js"></script>
   <script src="node_modules/vue/dist/vue.min.js"></script>
   <script src="node_modules/vue-router/dist/vue-router.min.js"></script>
