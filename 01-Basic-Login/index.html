@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" v-cloak>
     <header>
       <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary fixed-top">
         <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -24,13 +24,19 @@
             <li class="nav-item">
               <router-link to="/" class="nav-link">Home</router-link>
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/public">Public Route</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/private" v-show="authenticated">Private Route</router-link>
+            </li>
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <router-link class="nav-link" to="/login">Log In</router-link>
+              <button class="btn btn-primary" v-show="!authenticated" @click="login">Log In</button>
             </li>
             <li class="nav-item">
-              <router-link to="/logout" class="nav-link">Log Out</router-link>
+              <button class="btn btn-primary" v-show="authenticated" @click="logout">Log Out</button>
             </li>
           </ul>
         </div>
@@ -38,31 +44,33 @@
     </header>
     <main class="container">
       <router-view></router-view>
+      <div v-show="authenticated">
+        <button class="btn btn-primary" @click="getSecretThing()">Get Secret Thing</button>
+        <h3>{{secretThing}}</h3>
+      </div>
     </main>
   </div>
 
-  <script type="text/x-template" id="home-template">
+  <script type="text/x-template" id="public-template">
     <h4>
-      You are logged in!
+      This is a public route
     </h4>
   </script>
-  <script type="text/x-template" id="login-template">
+  <script type="text/x-template" id="private-template">
     <h4>
-      Login template
+      This is a private route
     </h4>
-  </script>
-  <script type="text/x-template" id="logout-template">
-    <h4>
-      Logout templates
-    </h4>
+    <p>If you are reading this, you are authenticated.</p>
   </script>
 
   <script src="https://cdn.auth0.com/js/lock/10.11/lock.min.js"></script>
   <script src="node_modules/vue/dist/vue.min.js"></script>
   <script src="node_modules/vue-router/dist/vue-router.min.js"></script>
+  <script src="node_modules/vue-resource/dist/vue-resource.min.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="node_modules/tether/dist/js/tether.js"></script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="auth0-variables.js"></script>
   <script src="index.js"></script>
 </body>
 
