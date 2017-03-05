@@ -48,6 +48,10 @@
   import Auth0Lock from 'auth0-lock';
   import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from './auth0-variables';
 
+  // Utility to check auth status
+  function checkAuth() {
+    return !!localStorage.getItem('id_token');
+  }
   export default {
     components: [
       Home,
@@ -71,8 +75,51 @@
       }
     },
     methods: {
-      login() { },
-      logout() { }
+      login() {
+        this.lock.show();
+      },
+      logout() {
+        // To log out, we just need to remove the token and profile from local storage
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('profile');
+        this.authenticated = false;
+      },
+      // Make a secure call to the server by attaching the user's JWT as an
+      // Authorization header
+      getSecretThing() {
+        var jwtHeader = {
+          'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+        };
+        // GET /someUrl
+        this.$http.get('http://localhost:3001/secured/ping').then(response => {
+          // get body data
+          this.someData = response.body;
+        }, error => {
+          // error callback
+          console.log(error);
+        });
+      }
+    },
+    mounted() {
+      this.authenticated = checkAuth();
+      this.lock.on('authenticated', (authResult) => {
+        console.log('authenticated');
+        localStorage.setItem('id_token', authResult.accessToken);
+        this
+          .lock
+          .getUserInfo(authResult.accessToken, (error, profile) => {
+            if (error) {
+              // Handle error
+              return;
+            }
+            // Set the token and user profile in local storage
+            localStorage.setItem('profile', JSON.stringify(profile));
+            this.authenticated = true;
+          });
+      });
+      this.lock.on('authorization_error', (error) => {
+        // handle error when authorizaton fails
+      });
     }
   }
 
@@ -80,7 +127,6 @@
 
 <style lang="scss">
   @import "scss/main";
-
   [v-cloak] {
     display: none;
   }

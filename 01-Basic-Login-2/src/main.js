@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import App from './App.vue';
 import VueRouter from 'vue-router';
+import VueResource from 'vue-resource';
+import App from './App.vue';
 
 import Home from './components/Home.vue';
 import Public from './components/Public.vue';
@@ -12,6 +13,15 @@ global.Tether = require('tether');
 require('bootstrap');
 
 Vue.use(VueRouter);
+Vue.use(VueResource);
+
+Vue.http.interceptors
+  .push((request, next) => {
+    request.headers
+      .set('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
+    next();
+  });
+
 const router = new VueRouter({
   mode: 'history',
   linkActiveClass: 'active',
