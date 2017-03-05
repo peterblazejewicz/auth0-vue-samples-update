@@ -1,6 +1,10 @@
+@import "~bootstrap/scss/bootstrap";
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
 html {
     background: #025aa5;
 }
+
 body {
     position: relative;
     min-height: 100vh;

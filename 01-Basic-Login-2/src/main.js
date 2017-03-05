@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
+
 import Home from './components/Home.vue';
 import Public from './components/Public.vue';
 import Private from './components/Private.vue';
@@ -12,7 +13,7 @@ require('bootstrap');
 
 Vue.use(VueRouter);
 const router = new VueRouter({
-  mode: 'history', 
+  mode: 'history',
   linkActiveClass: 'active',
   base: __dirname,
   routes: [
@@ -35,4 +36,4 @@ new Vue({
   el: '#app',
   router,
   render: h => h(App)
-});//.$mount('#app');
+});

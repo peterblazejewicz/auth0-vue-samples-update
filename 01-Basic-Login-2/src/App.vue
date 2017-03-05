@@ -79,8 +79,8 @@
 </script>
 
 <style lang="scss">
-  @import "~bootstrap/scss/bootstrap";
   @import "scss/main";
+
   [v-cloak] {
     display: none;
   }
