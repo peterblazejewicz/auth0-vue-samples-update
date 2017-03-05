@@ -1,60 +1,87 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1></h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <header>
+      <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary fixed-top">
+        <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <router-link to="/" class="navbar-brand">Auth0 - Vue.js</router-link>
+          <div class="navbar-collapse collapse" id="navbarsExampleDefault" aria-expanded="false">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <router-link to="/" class="nav-link">Home</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/public">Public Route</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/private" v-show="authenticated">Private Route</router-link>
+              </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <button class="btn btn-primary" v-show="!authenticated" @click="login">Log In</button>
+              </li>
+              <li class="nav-item">
+                <button class="btn btn-primary" v-show="authenticated" @click="logout">Log Out</button>
+              </li>
+            </ul>
+          </div>
+      </nav>
+    </header>
+    <main class="container">
+      <router-view></router-view>
+      <div v-show="authenticated">
+        <button class="btn btn-primary" @click="getSecretThing()">Get Secret Thing</button>
+        <h3>{{secretThing}}</h3>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  import Home from './components/Home.vue';
+  import Public from './components/Public.vue';
+  import Private from './components/Private.vue';
+  import NotFound from './components/NotFound.vue';
+  import Auth0Lock from 'auth0-lock';
+  import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from './auth0-variables';
+
+  export default {
+    components: [
+      Home,
+      Public,
+      Private,
+      NotFound
+    ],
+    name: 'app',
+    data() {
+      return {
+        authenticated: false,
+        secretThing: '',
+        lock: new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
+          oidcConformant: true,
+          autoclose: true,
+          auth: {
+            responseType: 'token id_token',
+            audience: `https://${AUTH0_DOMAIN}/userinfo`
+          }
+        })
+      }
+    },
+    methods: {
+      login() { },
+      logout() { }
     }
   }
-}
+
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+  @import "~bootstrap/scss/bootstrap";
+  @import "scss/main";
+  [v-cloak] {
+    display: none;
+  }
 </style>
